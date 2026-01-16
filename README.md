@@ -74,12 +74,13 @@ GDGoC 동아리 Beginner 일정에 맞추어 약 2개월간 기획부터 설계,
 
 ```bash
 git clone https://github.com/GDGoC-Beginner/Library-reservation.git
-cd library-seat-reservation/frontend
+
 ```
 
 ### 프로젝트 실행
 
 ```bash
+cd frontend
 npm install
 npm run dev
 ```
