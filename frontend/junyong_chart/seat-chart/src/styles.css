@@ -1,0 +1,53 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #f5f6f7; }
+
+.page { min-height: 100vh; display: flex; flex-direction: column; }
+
+.topbar {
+  height: 64px; background: #1f6fd6; color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px;
+}
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+.backBtn { border: none; background: transparent; color: #fff; font-size: 22px; cursor: pointer; }
+
+.titleWrap { display: flex; flex-direction: column; line-height: 1.1; }
+.title { font-weight: 800; font-size: 16px; opacity: .95; }
+.subtitle { font-weight: 700; font-size: 18px; margin-top: 4px; }
+
+.pill { border-radius: 999px; padding: 8px 12px; font-weight: 900; font-size: 13px; }
+.pill-available { background: #f4c521; color: #222; }
+
+.content { width: min(1000px, 96vw); margin: 12px auto 24px; }
+
+.mapWrap {
+  background: #fff; border-radius: 14px; padding: 10px;
+  border: 1px solid #e6e6e6; overflow-x: auto;
+}
+.map { position: relative; width: 860px; height: 520px; background: #fff; }
+
+.roomTopArea {
+  position: absolute; left: 0; right: 0; top: 0; height: 350px;
+  background: #3a3a3a; border-radius: 12px;
+}
+.roomBottomArea { position: absolute; left: 0; right: 0; top: 390px; bottom: 0; background: #fff; }
+
+.block { position: absolute; padding: 6px; border-radius: 10px; }
+.block-grid { display: flex; flex-direction: column; gap: 6px; }
+.block-row { display: flex; gap: 6px; }
+
+.seat {
+  width: 42px; height: 42px; border-radius: 6px;
+  border: 1px solid #caa10c; background: #f4c521; color: #222;
+  font-weight: 900; font-size: 13px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.seat.occupied { background: #b7b7b7; border-color: #8f8f8f; cursor: not-allowed; opacity: .95; }
+.seat.selected { background: #2ecc71; border-color: #1f9b52; color: #0a2b16; }
+
+.bottomBar { margin-top: 14px; display: flex; justify-content: space-between; gap: 12px; align-items: auto; }
+.selection { font-size: 15px; color: #222; }
+.reserveBtn {
+  border: none; background: #1f6fd6; color: #fff; font-weight: 900;
+  padding: 12px 16px; border-radius: 10px; cursor: pointer;
+}
