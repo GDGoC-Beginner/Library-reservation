@@ -1,5 +1,11 @@
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import LoginPage from './pages/Login/LoginPage'
+import RegisterPage from './pages/Register/RegisterPage'
 
 // 임시 페이지들 (나중에 다른 팀원이 교체)
 function DummyLogin() {
@@ -15,7 +21,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/login" element={<DummyLogin />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/rooms/:roomId" element={<DummyRoom />} />
 
         {/* 이상한 경로 들어오면 메인으로 */}
