@@ -1,0 +1,238 @@
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --text: #101828;
+  --muted: #667085;
+  --line: rgba(16, 24, 40, 0.08);
+
+  --primary: #4f7cff;
+  --primary-weak: rgba(79, 124, 255, 0.14);
+
+  --shadow-sm: 0 5px 16px rgba(16, 24, 40, 0.08);
+
+  --r-lg: 16px;
+}
+
+/* ============ root ============ */
+.mp-root {
+  min-height: 100vh;
+  background:
+    radial-gradient(1000px 520px at 20% 0%, #eef2ff 0%, transparent 55%),
+    radial-gradient(900px 500px at 90% 10%, #e8f6ff 0%, transparent 50%),
+    var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto,
+    "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+/* ============ header ============ */
+.mp-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.mp-headerInner {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mp-logoText {
+  font-size: 17px;
+  font-weight: 900;
+}
+
+/* ============ container ============ */
+.mp-container {
+  width: 100%;
+  max-width: 600px;     /* ⭐ 핵심: 딱 중간 */
+  margin: 0 auto;
+  padding: 18px 14px 32px;
+}
+
+/* ============ sections ============ */
+.mp-section {
+  margin-top: 14px;
+}
+
+.mp-sectionLast {
+  margin-bottom: 22px;
+}
+
+.mp-sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  font-size: 15.5px;
+  margin-bottom: 8px;
+}
+
+/* ============ cards ============ */
+.mp-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.mp-muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ============ buttons ============ */
+.mp-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 9px 13px;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.mp-btnPrimary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.mp-btnSecondary {
+  background: var(--primary-weak);
+  color: var(--primary);
+}
+
+.mp-btnGhost {
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.mp-inlineBtn {
+  margin-left: auto;
+  padding: 7px 11px;
+  border-radius: 999px;
+}
+
+/* ============ reservation ============ */
+.mp-userBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.mp-userName {
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.mp-userId {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.mp-reserveGrid {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  gap: 12px;
+}
+
+.mp-reserveInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mp-infoRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.mp-infoLabel {
+  width: 58px;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.mp-infoValue {
+  font-weight: 800;
+}
+
+/* ============ rooms ============ */
+.mp-roomRow {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.mp-roomCard {
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.mp-roomName {
+  font-weight: 900;
+  font-size: 14.5px;
+}
+
+.mp-roomMeta {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ============ history ============ */
+.mp-historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.mp-historyItem {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 11px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mp-historyDate {
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.mp-historyRoom {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.mp-historySeat {
+  font-weight: 900;
+}
+
+/* ============ PC 보정 ============ */
+@media (min-width: 768px) {
+  .mp-container {
+    max-width: 640px;   /* PC에서 살짝만 여유 */
+  }
+}
+
+@media (min-width: 1100px) {
+  .mp-container {
+    max-width: 680px;   /* 큰 화면에서도 과확장 방지 */
+  }
+}
