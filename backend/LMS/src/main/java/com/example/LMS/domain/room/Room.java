@@ -1,11 +1,13 @@
 package com.example.LMS.domain.room;
 
+import com.example.LMS.domain.seat.Seat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ROOMS", schema = "SCOTT") // ERD 기준 스키마 명시
@@ -17,7 +19,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_seq_gen")
     @SequenceGenerator(name = "room_seq_gen", sequenceName = "ROOM_SEQ", allocationSize = 1)
     @Column(name = "ROOM_ID")
-    private Integer roomId;
+    private Long roomId;
 
     @Column(name = "ROOM_NAME", nullable = false, unique = true, length = 50)
     private String roomName;
