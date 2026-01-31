@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/MainPage/MainPage.jsx";
 
 // 임시 페이지들 (나중에 다른 팀원이 교체)
 function DummyLogin() {
