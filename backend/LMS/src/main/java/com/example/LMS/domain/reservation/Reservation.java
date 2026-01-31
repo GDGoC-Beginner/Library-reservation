@@ -1,10 +1,12 @@
 package com.example.LMS.domain.reservation;
 
 import com.example.LMS.domain.user.User;
+import com.example.LMS.domain.seat.Seat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "RESERVATIONS")
