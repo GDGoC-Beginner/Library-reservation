@@ -21,6 +21,9 @@ import { formatTimeRange } from "@/lib/time";
 export default function MainPage() {
   const navigate = useNavigate();
 
+  // ✅ 연장 정책: 무조건 1회 고정
+  const EXTEND_LIMIT = 1;
+
   // ===== 상태 =====
   const [isAuthed, setIsAuthed] = useState(false);
   const [me, setMe] = useState(null);
@@ -104,10 +107,12 @@ export default function MainPage() {
   }, [current]);
 
   const canReturn = !!current && current.status === "ACTIVE";
+
+  // ✅ 연장 가능 조건: 최대 1회로 강제
   const canExtend =
     !!current &&
     current.status === "ACTIVE" &&
-    current.extendCount < current.extendLimit;
+    (current.extendCount ?? 0) < EXTEND_LIMIT;
 
   // ===== handlers =====
   const handleLogout = async () => {
@@ -140,7 +145,7 @@ export default function MainPage() {
 
     try {
       await extendReservation(current.reservationId);
-      await fetchMe();
+      await fetchMe(); // 연장 후 현재 예약 갱신
     } catch {
       alert("연장에 실패했습니다.");
     }
@@ -212,7 +217,7 @@ export default function MainPage() {
                   </button>
                 </div>
 
-                {/* 내용: 예약 정보 + 오른쪽 반납 */}
+                {/* 내용: 예약 정보 */}
                 <div className="mp-reserveGrid mp-reserveGrid--loggedIn">
                   <div className="mp-reserveInfo">
                     <div className="mp-infoRow">
@@ -249,7 +254,7 @@ export default function MainPage() {
                       <span className="mp-infoLabel">연장횟수</span>
                       <span className="mp-infoValue">
                         {current
-                          ? `${current.extendCount} / ${current.extendLimit}`
+                          ? `${current.extendCount ?? 0} / ${EXTEND_LIMIT}`
                           : "-"}
                       </span>
 
@@ -257,7 +262,11 @@ export default function MainPage() {
                         className="mp-btn mp-btnSecondary mp-inlineBtn"
                         disabled={!canExtend}
                         onClick={handleExtend}
-                        title={!canExtend ? "연장 가능 횟수를 확인해줘" : ""}
+                        title={
+                          !canExtend
+                            ? "연장은 최대 1번만 가능해요."
+                            : ""
+                        }
                       >
                         연장
                       </button>
@@ -327,10 +336,15 @@ export default function MainPage() {
                         {String(h.date).replaceAll("-", ". ")}
                       </div>
                       <div className="mp-historyRoom">{h.roomName}</div>
-                      {h.status ? (
-                        <div className="mp-historyStatus">{h.status}</div>
-                      ) : null}
+
+                      {/* ✅ RETURNED(status) 제거 → 사용시간 표시 */}
+                      <div className="mp-historyRoom">
+                        {h.startTime && h.endTime
+                          ? formatTimeRange(h.startTime, h.endTime)
+                          : "-"}
+                      </div>
                     </div>
+
                     <div className="mp-historySeat">{h.seatNumber}</div>
                   </div>
                 ))}
