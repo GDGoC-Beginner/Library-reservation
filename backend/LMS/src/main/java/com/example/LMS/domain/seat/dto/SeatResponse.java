@@ -11,14 +11,15 @@ public class SeatResponse {
     private Long seatId;
     private Long roomId;
     private Integer seatNumber;
-    private String isAvailable;
+    private Boolean isAvailable;
 
     public static SeatResponse from(Seat seat) {
         return SeatResponse.builder()
                 .seatId(seat.getSeatId())
                 .roomId(seat.getRoom().getRoomId())
                 .seatNumber(seat.getSeatNumber())
-                .isAvailable(seat.getIsAvailable())
+                .isAvailable("Y".equals(seat.getIsAvailable()))
                 .build();
     }
+
 }

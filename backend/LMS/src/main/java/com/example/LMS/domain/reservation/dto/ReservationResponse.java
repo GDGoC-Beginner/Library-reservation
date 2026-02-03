@@ -1,6 +1,6 @@
-package com.example.lms.domain.reservation.dto;
+package com.example.LMS.domain.reservation.dto;
 
-import com.example.lms.domain.reservation.Reservation;
+import com.example.LMS.domain.reservation.Reservation;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -23,7 +23,7 @@ public class ReservationResponse {
         return ReservationResponse.builder()
                 .reservationId(reservation.getReservationId())
                 .seatId(reservation.getSeat().getSeatId())
-                .userId(reservation.getUser().getUserId())
+                .userId(reservation.getUser().getUserid())
                 .status(reservation.getStatus())
                 .startTime(reservation.getStartTime())
                 .endTime(reservation.getEndTime())

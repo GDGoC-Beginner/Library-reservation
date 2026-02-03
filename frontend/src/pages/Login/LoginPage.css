@@ -1,0 +1,137 @@
+/* ===== 로그인 페이지 전체 컨테이너 ===== */
+/* position: fixed로 화면 전체를 차지하게 함 */
+/* flexbox로 내용물을 정중앙에 배치 */
+.login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;  /* 최소 높이: 뷰포트 전체 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+/* ===== 로그인 폼 박스 ===== */
+/* 흰색 배경에 둥근 모서리와 그림자 */
+.login__container {
+  width: 100%;
+  max-width: 400px;   /* 최대 너비 제한 */
+  background-color: #ffffff;
+  border-radius: 8px;   /* 둥근 모서리 */
+  padding: 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== 로고 이미지 ===== */
+.login__logo {
+  display: block;
+  max-width: 250px;   /* 최대 너비 제한 */
+  height: auto;       /* 비율 유지 */
+  margin: 0 auto 24px auto;
+}
+
+/* ===== 페이지 제목 ===== */
+.login__title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 32px;
+  color: #333333;
+}
+
+/* ===== 폼 전체 레이아웃 ===== */
+/* 세로 방향으로 요소 배치, 간격 20px */
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;    /* 필드 간 간격 */
+}
+
+/* ===== 각 입력 필드 컨테이너 ===== */
+.login__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;   /* 라벨과 입력창 간격 */
+}
+
+/* ===== 입력 필드 라벨 ===== */
+.login__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555555;
+}
+
+/* ===== 텍스트 입력 필드 ===== */
+.login__input {
+  padding: 12px 16px;
+  font-size: 14px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  outline: none;              /* 기본 포커스 아웃라인 제거 */
+  transition: border-color 0.2s;
+}
+
+/* 입력 필드 포커스 시 테두리 색상 변경 */
+.login__input:focus {
+  border-color: #4a90d9;
+}
+
+/* placeholder 텍스트 */
+.login__input::placeholder {
+  color: #aaaaaa;
+}
+
+/* ===== 에러 메시지 ===== */
+.login__error {
+  color: #e74c3c;
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+}
+
+/* ===== 로그인 버튼 ===== */
+.login__button {
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #4a90d9;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* 로그인 버튼 호버 시 어두운 파란색 */
+.login__button:hover {
+  background-color: #3a7bc8;
+}
+
+/* 버튼 비활성화 상태 (로딩 중) */
+.login__button:disabled {
+  background-color: #a0c4e8;
+  cursor: not-allowed;  /* 금지 커서 */
+}
+
+/* ===== 회원가입 페이지 링크 ===== */
+.login__link {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #666666;
+}
+
+/* 링크 스타일 */
+.login__link a {
+  color: #4a90d9;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* 링크 호버 시 밑줄 표시 */
+.login__link a:hover {
+  text-decoration: underline;
+}
