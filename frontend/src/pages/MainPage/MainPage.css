@@ -27,8 +27,10 @@
 
 /* ============ header ============ */
 .mp-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 20;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
@@ -50,9 +52,9 @@
 /* ============ container ============ */
 .mp-container {
   width: 100%;
-  max-width: 600px;     /* ⭐ 핵심: 딱 중간 */
+  max-width: 600px;
   margin: 0 auto;
-  padding: 18px 14px 32px;
+  padding: 86px 14px 32px;
 }
 
 /* ============ sections ============ */
@@ -112,8 +114,11 @@
   border: 1px solid var(--line);
 }
 
+/* 버튼이 값 옆에서 한 줄로 유지 */
 .mp-inlineBtn {
-  margin-left: auto;
+  margin-left: 10px;
+  white-space: nowrap;
+  flex: 0 0 auto;
   padding: 7px 11px;
   border-radius: 999px;
 }
@@ -128,6 +133,13 @@
   border-bottom: 1px dashed var(--line);
 }
 
+.mp-userText {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
 .mp-userName {
   font-weight: 900;
   font-size: 15px;
@@ -140,30 +152,45 @@
 
 .mp-reserveGrid {
   display: grid;
-  grid-template-columns: 104px 1fr;
   gap: 12px;
+}
+
+.mp-reserveGrid--loggedOut {
+  grid-template-columns: 104px 1fr;
+}
+
+.mp-reserveGrid--loggedIn {
+  grid-template-columns: 1fr;
 }
 
 .mp-reserveInfo {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 .mp-infoRow {
   display: flex;
   align-items: center;
-  gap: 8px;
+  flex-wrap: nowrap;
+  gap: 14px;
   font-size: 13px;
 }
 
 .mp-infoLabel {
-  width: 58px;
+  width: 72px;
+  flex: 0 0 auto;
+  white-space: nowrap;
   font-weight: 800;
   color: var(--muted);
 }
 
 .mp-infoValue {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  word-break: keep-all;
   font-weight: 800;
 }
 
@@ -227,12 +254,18 @@
 /* ============ PC 보정 ============ */
 @media (min-width: 768px) {
   .mp-container {
-    max-width: 640px;   /* PC에서 살짝만 여유 */
+    max-width: 640px;
   }
 }
 
 @media (min-width: 1100px) {
   .mp-container {
-    max-width: 680px;   /* 큰 화면에서도 과확장 방지 */
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 420px) {
+  .mp-card.mp-reserveCard {
+    overflow-x: auto;
   }
 }

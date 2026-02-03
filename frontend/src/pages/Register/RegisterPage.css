@@ -1,15 +1,14 @@
 /* ===== 회원가입 페이지 전체 컨테이너 ===== */
 .register {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;         
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: #f5f5f5;
   padding: 20px;
+  overflow-y: auto;
 }
 
 /* ===== 회원가입 폼 박스 ===== */
@@ -172,4 +171,11 @@
 /* 링크 호버 시 밑줄 표시 */
 .register__link a:hover {
   text-decoration: underline;
+}
+
+/* 화면 높이가 낮으면(노트북/작은 창) 위에서부터 시작 */
+@media (max-height: 760px) {
+  .register {
+    align-items: flex-start;
+  }
 }
