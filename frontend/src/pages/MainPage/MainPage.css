@@ -50,7 +50,7 @@
 /* ============ container ============ */
 .mp-container {
   width: 100%;
-  max-width: 600px;     /* ⭐ 핵심: 딱 중간 */
+  max-width: 600px;     
   margin: 0 auto;
   padding: 18px 14px 32px;
 }
