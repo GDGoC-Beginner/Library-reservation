@@ -20,7 +20,7 @@ public class UserService {
 
     //1. 아이디 중복 확인
     public CheckIdResponse checkUsername(String username) {
-        boolean isAvailable = !userRepository.existByUsername(username);
+        boolean isAvailable = !userRepository.existsByUsername(username);
         String message = isAvailable ? "사용 가능한 아이디입니다." : "이미 사용 중인 아이디입니다.";
         return new CheckIdResponse(message, isAvailable);
     }
@@ -29,7 +29,7 @@ public class UserService {
     @Transactional
     public void signUp(SignUpRequest request) {
         //2-1. 아이디 중복 검증화
-        if(userRepository.existByUsername(request.getUsername())) { //exist -> 존재 여부만 검증 find -> data 조회
+        if(userRepository.existsByUsername(request.getUsername())) { //exist -> 존재 여부만 검증 find -> data 조회
             throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
         }
         //2-2. 비밀번호 암호화 단방향 해시 함수 (BCrypt) 적용

@@ -23,7 +23,7 @@ public class ReservationResponse {
         return ReservationResponse.builder()
                 .reservationId(reservation.getReservationId())
                 .seatId(reservation.getSeat().getSeatId())
-                .userId(reservation.getUser().getUserid())
+                .userId(reservation.getUser().getUserId())
                 .status(reservation.getStatus())
                 .startTime(reservation.getStartTime())
                 .endTime(reservation.getEndTime())

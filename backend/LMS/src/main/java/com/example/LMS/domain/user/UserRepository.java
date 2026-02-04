@@ -14,5 +14,5 @@ public interface UserRepository
     Optional<User> findByUsername(String username);
 
     //2. 회원가입 시에 아이디의 중복 유무를 검증
-    boolean existByUsername(String username);
+    boolean existsByUsername(String username);
 }
