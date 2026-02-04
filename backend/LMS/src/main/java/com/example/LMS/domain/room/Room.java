@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "ROOMS", schema = "SCOTT") // ERD 기준 스키마 명시
+@Table(name = "ROOMS") // ERD 기준 스키마 명시
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Room {
@@ -29,5 +29,5 @@ public class Room {
 
     // 좌석과의 1:N 관계 (선택 사항)
     @OneToMany(mappedBy = "room")
-    private List<Seat> seats = new ArrayList<>();
+    private final List<Seat> seats = new ArrayList<>();
 }

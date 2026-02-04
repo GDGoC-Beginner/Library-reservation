@@ -21,7 +21,7 @@ public class ReservationService {
     private final SeatRepository seatRepository;
     private final ReservationRepository reservationRepository;
 
-    //좌석 예약
+    // 좌석 예약
     @Transactional
     public ReservationResponse createReservation(Long userId, ReservationCreateRequest request) {
 
@@ -63,7 +63,7 @@ public class ReservationService {
         return ReservationResponse.from(reservation);
     }
 
-    //예약 취소
+    // 예약 취소
     @Transactional
     public void cancelReservation(Long reservationId) {
 
@@ -77,7 +77,7 @@ public class ReservationService {
         reservation.getSeat().release();
     }
 
-    //예약 연장
+    // 예약 연장
     @Transactional
     public void extendReservation(Long reservationId) {
 
@@ -89,4 +89,3 @@ public class ReservationService {
         reservation.extend(newEndTime);
     }
 }
-
