@@ -8,13 +8,12 @@ import java.util.Optional;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    /* 사용자별 예약 목록 */
     List<Reservation> findByUser_UserId(Long userId);
 
-    /* 좌석의 현재 활성 예약 */
     Optional<Reservation> findBySeat_SeatIdAndStatus(Long seatId, String status);
 
-    /* 특정 시간대에 겹치는 예약 조회 (중복 예약 방지) */
+    Optional<Reservation> findByUser_UserIdAndStatus(Long userId, String status);
+
     boolean existsBySeat_SeatIdAndStatusAndStartTimeLessThanAndEndTimeGreaterThan(
             Long seatId,
             String status,
@@ -22,3 +21,4 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             LocalDateTime startTime
     );
 }
+

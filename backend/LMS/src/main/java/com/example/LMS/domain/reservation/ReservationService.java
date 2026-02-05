@@ -1,6 +1,8 @@
 package com.example.LMS.domain.reservation;
 
+import com.example.LMS.domain.reservation.dto.ReservationCancelResponse;
 import com.example.LMS.domain.reservation.dto.ReservationCreateRequest;
+import com.example.LMS.domain.reservation.dto.ReservationExtendResponse;
 import com.example.LMS.domain.reservation.dto.ReservationResponse;
 import com.example.LMS.domain.seat.Seat;
 import com.example.LMS.domain.seat.SeatRepository;
@@ -65,27 +67,45 @@ public class ReservationService {
 
     // 예약 취소
     @Transactional
-    public void cancelReservation(Long reservationId) {
+    public ReservationCancelResponse cancelReservation(Long reservationId) {
 
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다."));
 
-        // 예약 취소
         reservation.cancel();
-
-        // 좌석 해제
         reservation.getSeat().release();
+
+        return ReservationCancelResponse.from(reservation);
     }
+
 
     // 예약 연장
     @Transactional
-    public void extendReservation(Long reservationId) {
+    public ReservationExtendResponse extendReservation(Long reservationId) {
 
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다."));
 
         LocalDateTime newEndTime = reservation.getEndTime().plusHours(6);
-
         reservation.extend(newEndTime);
+
+        return ReservationExtendResponse.from(reservation);
     }
+
+
+
+    //내 예약 조회
+    public ReservationResponse getCurrentReservation(Long userId) {
+
+        Reservation reservation = reservationRepository
+                .findByUser_UserIdAndStatus(userId, "ACTIVE")
+                .orElse(null);
+
+        if (reservation == null) {
+            return null;
+        }
+
+        return ReservationResponse.from(reservation);
+    }
+
 }

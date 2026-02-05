@@ -21,7 +21,12 @@ import lombok.*;
 public class Seat {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seat_seq_gen")
+    @SequenceGenerator(
+            name = "seat_seq_gen",
+            sequenceName = "SEQ_SEATS", // DB 시퀀스 이름
+            allocationSize = 1
+    )
     @Column(name = "SEAT_ID")
     private Long seatId;
 
@@ -37,7 +42,6 @@ public class Seat {
     private String isAvailable; // Y / N
 
     /* ===== 비즈니스 메서드 ===== */
-
     public void occupy() {
         this.isAvailable = "N";
     }
@@ -46,3 +50,4 @@ public class Seat {
         this.isAvailable = "Y";
     }
 }
+
