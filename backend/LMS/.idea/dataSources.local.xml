@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-253.30387.90">
+    <data-source name="@localhost" uuid="1b791db8-1053-4838-b8e5-985631fea723">
+      <database-info product="Oracle" version="Oracle AI Database 26ai Free Release 23.26.0.0.0 - Develop, Learn, and Run for Free&#10;Version 23.26.0.0.0" jdbc-version="4.3" driver-name="Oracle JDBC driver" driver-version="23.5.0.24.07" dbms="ORACLE" exact-version="23.26.0.0.0" exact-driver-version="23.5">
+        <extra-name-characters>$#</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>myapp</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema">
+            <name qname="@" />
+            <name qname="PUBLIC" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+  </component>
+</project>
