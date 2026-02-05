@@ -18,7 +18,12 @@ import java.time.LocalDateTime;
 public class History {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "history_seq_gen")
+    @SequenceGenerator(
+            name = "history_seq_gen",
+            sequenceName = "SEQ_USAGE_HISTORIES",
+            allocationSize = 1
+    )
     @Column(name = "HISTORY_ID")
     private Long historyId;
 
@@ -42,12 +47,16 @@ public class History {
 
     @Column(name = "STATUS", length = 20, nullable = false)
     private String status;
-    // USED, CANCELED, NO_SHOW, COMPLETED
 
-    @Column(name = "CREATED_AT", nullable = false)
+    @Column(name = "CREATED_AT", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    /* ===== 상태 변경용 메서드 ===== */
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    /* ===== 상태 변경 ===== */
     public void changeStatus(String status) {
         this.status = status;
     }

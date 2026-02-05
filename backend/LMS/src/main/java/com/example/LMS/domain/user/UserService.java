@@ -1,10 +1,13 @@
 package com.example.LMS.domain.user;
 
 
+import com.example.LMS.domain.reservation.ReservationService;
+import com.example.LMS.domain.reservation.dto.ReservationResponse;
 import com.example.LMS.domain.user.dto.CheckIdResponse;
 import com.example.LMS.domain.user.dto.LoginRequest;
 import com.example.LMS.domain.user.dto.SignUpRequest;
 
+import com.example.LMS.domain.user.dto.UserReservationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder; //단방향 해시 함수 (BCrypt) 적용
+    private final ReservationService reservationService;
 
     //1. 아이디 중복 확인
     public CheckIdResponse checkUsername(String username) {
@@ -59,5 +63,21 @@ public class UserService {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         return user;
+    }
+
+    //내 예약 조회 가져오기
+    public UserReservationResponse getMyReservation(Long userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("사용자 없음"));
+
+        ReservationResponse reservation =
+                reservationService.getCurrentReservation(userId);
+
+        return new UserReservationResponse(
+                user.getUserId(),
+                user.getName(),
+                reservation
+        );
     }
 }

@@ -17,7 +17,12 @@ import java.time.LocalDateTime;
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservation_seq_gen")
+    @SequenceGenerator(
+            name = "reservation_seq_gen",
+            sequenceName = "SEQ_RESERVATIONS",
+            allocationSize = 1
+    )
     @Column(name = "RESERVATION_ID")
     private Long reservationId;
 
@@ -46,11 +51,16 @@ public class Reservation {
     @Column(name = "STATUS", length = 20, nullable = false)
     private String status; // RESERVED, CANCELED, COMPLETED
 
-    @Column(name = "CREATED_AT", nullable = false)
+    @Column(name = "CREATED_AT", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "CANCELED_AT")
     private LocalDateTime canceledAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 
     /* ===== 비즈니스 메서드 ===== */
 
@@ -67,3 +77,4 @@ public class Reservation {
         this.extendCount++;
     }
 }
+
