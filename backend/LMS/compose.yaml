@@ -1,7 +1,26 @@
 services:
-  oracle:
-    image: 'gvenzl/oracle-free:latest'
+  oracle-db:
+    image: gvenzl/oracle-free:latest
+    container_name: oracle-db
     environment:
-      - 'ORACLE_PASSWORD=secret'
+      # 관리자 비밀번호 (SYS, SYSTEM 계정)
+      ORACLE_PASSWORD: OraclePass123
+      # 애플리케이션용 사용자 자동 생성 (선택사항)
+      APP_USER: myapp
+      APP_USER_PASSWORD: myapp123
+      # 기본 데이터베이스명
     ports:
-      - '1521'
+      - "1522:1521"  # Oracle 리스너 포트
+    volumes:
+      # 초기화 스크립트 (컨테이너 최초 시작 시 실행)
+      - ./init-scripts:/container-entrypoint-initdb.d
+      # 데이터 영구 저장
+      - oracle-data-new:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  oracle-data-new:
