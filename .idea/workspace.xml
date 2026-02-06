@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="baf94ef7-f621-4e1d-a7cd-cb14cda9f9be" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/LMS/src/main/java/com/example/LMS/config/test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.gradle/8.14.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.gradle/8.14.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.gradle/8.14.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.gradle/8.14.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.gradle/8.14.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.gradle/8.14.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.idea/dataSources/1b791db8-1053-4838-b8e5-985631fea723.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.idea/dataSources/1b791db8-1053-4838-b8e5-985631fea723.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.idea/data_source_mapping.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.idea/data_source_mapping.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/src/main/java/com/example/LMS/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/src/main/java/com/example/LMS/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/src/main/java/com/example/LMS/domain/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/src/main/java/com/example/LMS/domain/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/src/main/java/com/example/LMS/domain/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/src/main/java/com/example/LMS/domain/user/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/src/main/java/com/example/LMS/domain/user/dto/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/LMS/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/auth/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/LMS/.idea/dataSources/bb4237a5-54bf-4f81-ba55-811f44bf5d15.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LMS/.idea/dataSources/bb4237a5-54bf-4f81-ba55-811f44bf5d15.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +40,9 @@
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/tjswn/Library-reservation",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -75,6 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1769862152321</updated>
       <workItem from="1770354383243" duration="180000" />
+      <workItem from="1770362314789" duration="1108000" />
     </task>
     <servers />
   </component>
