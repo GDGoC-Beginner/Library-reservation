@@ -1,7 +1,7 @@
 -- init.sql
 -- 좌석 예약 시스템 데이터베이스 초기화
 
--- 잠재적 오류 가능성 ALTER SESSION SET CONTAINER = FREEPDB1;
+ALTER SESSION SET CONTAINER = FREEPDB1;
 ALTER SESSION SET CURRENT_SCHEMA = MYAPP;
 
 -- 1. 사용자 테이블
@@ -26,7 +26,7 @@ CREATE TABLE seats (
                        seat_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                        room_id NUMBER NOT NULL,
                        seat_number NUMBER NOT NULL,
-                       is_available CHAR(1) DEFAULT 'Y' CHECK (is_available IN ('Y', 'N')),
+                       is_available VARCHAR2(1) DEFAULT 'Y' CHECK (is_available IN ('Y', 'N')),
                        CONSTRAINT fk_seat_room FOREIGN KEY (room_id) REFERENCES rooms(room_id),
                        CONSTRAINT uq_room_seat UNIQUE (room_id, seat_number)
 );
@@ -49,16 +49,16 @@ CREATE TABLE reservations (
 
 -- 5. 사용 이력 테이블
 CREATE TABLE usage_histories (
-    history_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    user_id NUMBER NOT NULL,
-    seat_id NUMBER NOT NULL,
-    reservation_id NUMBER,
-    use_date DATE NOT NULL,
-    status VARCHAR2(20) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_uh_user FOREIGN KEY (user_id) REFERENCES users(user_id),
-    CONSTRAINT fk_uh_seat FOREIGN KEY (seat_id) REFERENCES seats(seat_id),
-    CONSTRAINT fk_uh_reservation FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id)
+                                 history_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                                 user_id NUMBER NOT NULL,
+                                 seat_id NUMBER NOT NULL,
+                                 reservation_id NUMBER,
+                                 use_date DATE NOT NULL,
+                                 status VARCHAR2(20) NOT NULL,
+                                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                 CONSTRAINT fk_uh_user FOREIGN KEY (user_id) REFERENCES users(user_id),
+                                 CONSTRAINT fk_uh_seat FOREIGN KEY (seat_id) REFERENCES seats(seat_id),
+                                 CONSTRAINT fk_uh_reservation FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id)
 );
 
 -- 인덱스 생성 -- 검색 효율을 위한 것듯

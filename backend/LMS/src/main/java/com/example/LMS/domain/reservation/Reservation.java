@@ -17,12 +17,7 @@ import java.time.LocalDateTime;
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservation_seq_gen")
-    @SequenceGenerator(
-            name = "reservation_seq_gen",
-            sequenceName = "SEQ_RESERVATIONS",
-            allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RESERVATION_ID")
     private Long reservationId;
 

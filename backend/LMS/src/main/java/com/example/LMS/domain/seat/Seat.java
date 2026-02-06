@@ -21,12 +21,7 @@ import lombok.*;
 public class Seat {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seat_seq_gen")
-    @SequenceGenerator(
-            name = "seat_seq_gen",
-            sequenceName = "SEQ_SEATS", // DB 시퀀스 이름
-            allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SEAT_ID")
     private Long seatId;
 
