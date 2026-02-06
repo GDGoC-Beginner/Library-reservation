@@ -18,12 +18,7 @@ import java.time.LocalDateTime;
 public class History {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "history_seq_gen")
-    @SequenceGenerator(
-            name = "history_seq_gen",
-            sequenceName = "SEQ_USAGE_HISTORIES",
-            allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HISTORY_ID")
     private Long historyId;
 
