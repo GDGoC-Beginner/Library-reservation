@@ -19,9 +19,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
-                        //회원가입, 아이디 중복 확인은 인증 없이 접근 가능
-                        .anyRequest().authenticated()
+                                .requestMatchers("/auth/**").permitAll()
+                                //회원가입, 아이디 중복 확인은 인증 없이 접근 가능
+                                .anyRequest().authenticated()
                         //나머지는 로그인 필요
                 )
 

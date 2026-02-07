@@ -1,6 +1,7 @@
 package com.example.LMS.domain.user;
 
-import com.example.LMS.domain.user.dto.CheckIdResponse;
+import com.example.LMS.domain.user.dto.UsernameCheckRequest;
+import com.example.LMS.domain.user.dto.UsernameCheckResponse;
 import com.example.LMS.domain.user.dto.LoginRequest;
 import com.example.LMS.domain.user.dto.SignUpRequest;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,10 +27,19 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
 
     // 아이디 중복 체크
-    @GetMapping("/check")  // POST → GET으로 변경 (조회 작업이므로)
-    public ResponseEntity<CheckIdResponse> checkUsername(@RequestParam String username) {
-        CheckIdResponse response = userService.checkUsername(username);
-        return ResponseEntity.ok(response);
+    @PostMapping("/che  ck")
+    public ResponseEntity<UsernameCheckResponse> checkUsername(
+            @RequestBody UsernameCheckRequest request) {
+
+        boolean isAvailable = userService.isUsernameAvailable(request.getUsername());
+
+        String message = isAvailable
+                ? "사용 가능한 아이디입니다."
+                : "이미 사용 중인 아이디입니다.";
+
+        return ResponseEntity.ok(
+                new UsernameCheckResponse(isAvailable, message)
+        );
     }
 
     // 회원가입
