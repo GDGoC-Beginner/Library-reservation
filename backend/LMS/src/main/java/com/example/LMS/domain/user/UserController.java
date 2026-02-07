@@ -27,7 +27,7 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
 
     // 아이디 중복 체크
-    @PostMapping("/che  ck")
+    @PostMapping("/check")
     public ResponseEntity<UsernameCheckResponse> checkUsername(
             @RequestBody UsernameCheckRequest request) {
 
