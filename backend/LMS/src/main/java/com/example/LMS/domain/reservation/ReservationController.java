@@ -1,12 +1,9 @@
 package com.example.LMS.domain.reservation;
 
-import com.example.LMS.domain.reservation.dto.ReservationCreateRequest;
-import com.example.LMS.domain.reservation.dto.ReservationResponse;
-import com.example.LMS.domain.reservation.dto.ReservationCancelResponse;
-import com.example.LMS.domain.reservation.dto.ReservationExtendResponse;
-
-import jakarta.servlet.http.HttpSession;
+import com.example.LMS.domain.reservation.dto.*;
+import com.example.LMS.domain.user.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,42 +13,56 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
-    //좌석 예약
+    // 좌석 예약
     @PostMapping
     public ReservationResponse createReservation(
             @RequestBody ReservationCreateRequest request,
-            HttpSession session
+            @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
-        Long userId = (Long) session.getAttribute("USER_ID");
+        if (userDetails == null) {
+            throw new IllegalStateException("로그인이 필요합니다.");
+        }
+
+        Long userId = userDetails.getUserId();
         return reservationService.createReservation(userId, request);
     }
 
-    //좌석 예약 취소
+    // 좌석 예약 취소
     @DeleteMapping("/{reservationId}")
     public ReservationCancelResponse cancelReservation(
-            @PathVariable Long reservationId
+            @PathVariable Long reservationId,
+            @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
+        if (userDetails == null) {
+            throw new IllegalStateException("로그인이 필요합니다.");
+        }
+
         return reservationService.cancelReservation(reservationId);
     }
 
-    //좌석 예약 연장
+    // 좌석 예약 연장
     @PatchMapping("/{reservationId}/extend")
     public ReservationExtendResponse extendReservation(
-            @PathVariable Long reservationId
+            @PathVariable Long reservationId,
+            @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
+        if (userDetails == null) {
+            throw new IllegalStateException("로그인이 필요합니다.");
+        }
+
         return reservationService.extendReservation(reservationId);
     }
 
     // 내 예약 조회
     @GetMapping("/me")
     public ReservationResponse getMyReservation(
-            HttpSession session
+            @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
-        Long userId = (Long) session.getAttribute("USER_ID");
+        if (userDetails == null) {
+            throw new IllegalStateException("로그인이 필요합니다.");
+        }
+
+        Long userId = userDetails.getUserId();
         return reservationService.getCurrentReservation(userId);
     }
 }
-
-
-
-
