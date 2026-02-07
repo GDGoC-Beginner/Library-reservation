@@ -52,11 +52,7 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 사용자입니다."));
 
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword())
-                .roles("USER")  // 또는 user.getRole()
-                .build();
+        return new CustomUserDetails(user);  // 커스텀 UserDetails 반환
     }
 
     // 4. 내 예약 조회
