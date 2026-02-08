@@ -25,6 +25,8 @@ public class HistoryController {
         }
 
         Long userId = userDetails.getUserId();
+        List<HistoryResponse> items = historyService.getUserHistories(userId);
+
         return historyService.getUserHistories(userId);
     }
 
@@ -38,7 +40,6 @@ public class HistoryController {
         if (userDetails == null) {
             throw new IllegalStateException("로그인이 필요합니다.");
         }
-
         // TODO: 관리자 권한 체크 추가
         historyService.updateStatus(historyId, status);
     }

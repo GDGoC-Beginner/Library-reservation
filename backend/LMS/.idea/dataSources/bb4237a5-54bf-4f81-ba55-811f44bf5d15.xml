@@ -282,9 +282,9 @@
       <SequenceIdentity>1(1)</SequenceIdentity>
     </sequence>
     <table id="75" parent="21" name="RESERVATIONS">
-      <CreatedTimestamp>2026-02-06.15:21:07</CreatedTimestamp>
-      <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2026-02-06.15:21:07</ModifiedTimestamp>
+      <CreatedTimestamp>2026-02-06.18:24:09</CreatedTimestamp>
+      <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2026-02-06.18:24:09</ModifiedTimestamp>
       <ObjectId>72820</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
@@ -67527,7 +67527,7 @@
     <check id="8481" parent="75" name="SYS_C008763">
       <ColNames>STATUS</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
-      <ModifiedTimestamp>2026-02-06.15:21:07</ModifiedTimestamp>
+      <ModifiedTimestamp>2026-02-06.18:24:09</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
       <Predicate>status IN (&apos;ACTIVE&apos;, &apos;COMPLETED&apos;, &apos;CANCELED&apos;)</Predicate>
     </check>
@@ -67584,22 +67584,22 @@
     </column>
     <foreign-key id="8492" parent="75" name="FK_RES_USER">
       <ColNames>USER_ID</ColNames>
-      <ModifiedTimestamp>2026-02-06.15:21:07</ModifiedTimestamp>
+      <ModifiedTimestamp>2026-02-06.18:24:09</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>SYS_C008743</RefKeyName>
       <RefTableName>USERS</RefTableName>
     </foreign-key>
     <foreign-key id="8493" parent="75" name="FK_RES_SEAT">
       <ColNames>SEAT_ID</ColNames>
-      <ModifiedTimestamp>2026-02-06.15:21:07</ModifiedTimestamp>
+      <ModifiedTimestamp>2026-02-06.18:24:09</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>SYS_C008755</RefKeyName>
       <RefTableName>SEATS</RefTableName>
     </foreign-key>
     <index id="8494" parent="75" name="SYS_C008764">
       <ColNames>RESERVATION_ID</ColNames>
-      <CreatedTimestamp>2026-02-06.15:21:07</CreatedTimestamp>
-      <ModifiedTimestamp>2026-02-06.15:21:07</ModifiedTimestamp>
+      <CreatedTimestamp>2026-02-06.18:24:09</CreatedTimestamp>
+      <ModifiedTimestamp>2026-02-06.18:24:09</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>72822</ObjectId>
       <Unique>1</Unique>
@@ -67607,28 +67607,28 @@
     </index>
     <index id="8495" parent="75" name="IDX_RESERVATIONS_USER">
       <ColNames>USER_ID</ColNames>
-      <CreatedTimestamp>2026-02-06.15:21:07</CreatedTimestamp>
-      <ModifiedTimestamp>2026-02-06.15:21:07</ModifiedTimestamp>
+      <CreatedTimestamp>2026-02-06.18:24:10</CreatedTimestamp>
+      <ModifiedTimestamp>2026-02-06.18:24:10</ModifiedTimestamp>
       <ObjectId>72827</ObjectId>
       <TablespaceName>USERS</TablespaceName>
     </index>
     <index id="8496" parent="75" name="IDX_RESERVATIONS_SEAT">
       <ColNames>SEAT_ID</ColNames>
-      <CreatedTimestamp>2026-02-06.15:21:07</CreatedTimestamp>
-      <ModifiedTimestamp>2026-02-06.15:21:07</ModifiedTimestamp>
+      <CreatedTimestamp>2026-02-06.18:24:10</CreatedTimestamp>
+      <ModifiedTimestamp>2026-02-06.18:24:10</ModifiedTimestamp>
       <ObjectId>72828</ObjectId>
       <TablespaceName>USERS</TablespaceName>
     </index>
     <index id="8497" parent="75" name="IDX_RESERVATIONS_STATUS">
       <ColNames>STATUS</ColNames>
-      <CreatedTimestamp>2026-02-06.15:21:07</CreatedTimestamp>
-      <ModifiedTimestamp>2026-02-06.15:21:07</ModifiedTimestamp>
+      <CreatedTimestamp>2026-02-06.18:24:10</CreatedTimestamp>
+      <ModifiedTimestamp>2026-02-06.18:24:10</ModifiedTimestamp>
       <ObjectId>72829</ObjectId>
       <TablespaceName>USERS</TablespaceName>
     </index>
     <key id="8498" parent="75" name="SYS_C008764">
       <InitiallyDeferred>1</InitiallyDeferred>
-      <ModifiedTimestamp>2026-02-06.15:21:07</ModifiedTimestamp>
+      <ModifiedTimestamp>2026-02-06.18:24:09</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>SYS_C008764</UnderlyingIndexName>
