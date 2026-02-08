@@ -41,14 +41,21 @@ public class ReservationService {
         Seat seat = seatRepository.findById(request.getSeatId())
                 .orElseThrow(() -> new IllegalArgumentException("좌석을 찾을 수 없습니다."));
 
-        // 3. 좌석 사용 가능 여부 확인
+        // 3. 1인 1좌석 검증 (중복 예약 방지)
+        // 현재 사용자가 'ACTIVE' 상태인 예약을 이미 가지고 있는 확인합니다.
+        boolean hasActiveReservation = reservationRepository.existsByUserAndStatus(user, "ACTIVE");
+        if (hasActiveReservation) {
+            throw new IllegalStateException("이미 이용 중인 좌석이 있습니다. 1인당 1개의 좌석만 예약 가능합니다.");
+        }
+
+        // 4. 좌석 사용 가능 여부 확인
         if ("N".equals(seat.getIsAvailable())) {
             throw new IllegalStateException("이미 사용 중인 좌석입니다.");
         }
 
         // 4. 시간 계산
         LocalDateTime startTime = LocalDateTime.now();
-        LocalDateTime endTime = startTime.plusMinutes(1);
+        LocalDateTime endTime = startTime.plusMinutes(3);
 
         // 5. 좌석 점유
         seat.occupy();
