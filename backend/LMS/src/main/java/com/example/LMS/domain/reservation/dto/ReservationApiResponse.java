@@ -1,5 +1,6 @@
 package com.example.LMS.domain.reservation.dto;
 
+import com.example.LMS.domain.reservation.ReservationStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -18,5 +19,5 @@ public class ReservationApiResponse {
     private LocalDateTime endTime;
     private Integer extendCount;
     private Integer extendLimit;
-    private String status;
+    private ReservationStatus status;
 }

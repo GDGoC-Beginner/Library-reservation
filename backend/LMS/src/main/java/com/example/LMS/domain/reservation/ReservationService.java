@@ -4,6 +4,7 @@ import com.example.LMS.domain.reservation.dto.ReservationCancelResponse;
 import com.example.LMS.domain.reservation.dto.ReservationCreateRequest;
 import com.example.LMS.domain.reservation.dto.ReservationExtendResponse;
 import com.example.LMS.domain.reservation.dto.ReservationResponse;
+import com.example.LMS.domain.reservation.ReservationRepository;
 import com.example.LMS.domain.seat.Seat;
 import com.example.LMS.domain.seat.SeatRepository;
 import com.example.LMS.domain.user.User;
@@ -36,9 +37,15 @@ public class ReservationService {
                 .orElseThrow(() -> new IllegalArgumentException("좌석을 찾을 수 없습니다."));
 
         // 3. 좌석 사용 가능 여부 확인
-        if ("N".equals(seat.getIsAvailable())) {
+        boolean existsActive =
+                reservationRepository.existsBySeat_SeatIdAndStatus(
+                        request.getSeatId(),
+                        ReservationStatus.ACTIVE
+                );
+        if (existsActive) {
             throw new IllegalStateException("이미 사용 중인 좌석입니다.");
         }
+
 
         // 4. 시간 계산
         LocalDateTime startTime = LocalDateTime.now();
@@ -55,7 +62,7 @@ public class ReservationService {
                 .endTime(endTime)
                 .extendCount(0)
                 .extendLimit(1)
-                .status("ACTIVE")
+                .status(ReservationStatus.ACTIVE)
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -93,12 +100,11 @@ public class ReservationService {
     }
 
 
-
     //내 예약 조회
     public ReservationResponse getCurrentReservation(Long userId) {
 
         Reservation reservation = reservationRepository
-                .findByUser_UserIdAndStatus(userId, "ACTIVE")
+                .findByUser_UserIdAndStatus(userId, ReservationStatus.ACTIVE)
                 .orElse(null);
 
         if (reservation == null) {

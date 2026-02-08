@@ -55,4 +55,17 @@ public class History {
     public void changeStatus(String status) {
         this.status = status;
     }
+
+    /* ===== history 생성 메서드 ===== */
+    public static History fromReservation(Reservation reservation) {
+        return History.builder()
+                .user(reservation.getUser())
+                .seat(reservation.getSeat())
+                .reservation(reservation)
+                .useDate(reservation.getStartTime().toLocalDate())
+                .status(reservation.getStatus().name())
+                .build();
+    }
+
 }
+
