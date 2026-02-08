@@ -59,17 +59,24 @@ public class Reservation {
 
     /* ===== 비즈니스 메서드 ===== */
 
+    //예약 취소
     public void cancel() {
         this.status = "CANCELED";
         this.canceledAt = LocalDateTime.now();
     }
 
+    //예약 연장
     public void extend(LocalDateTime newEndTime) {
         if (extendCount >= extendLimit) {
             throw new IllegalStateException("연장 횟수를 초과했습니다.");
         }
         this.endTime = newEndTime;
         this.extendCount++;
+    }
+
+    //예약 시간 만료
+    public void complete() {
+        this.status = "COMPLETED";
     }
 }
 

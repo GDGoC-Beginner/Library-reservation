@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface HistoryRepository extends JpaRepository<History, Long> {
 
@@ -15,4 +16,6 @@ public interface HistoryRepository extends JpaRepository<History, Long> {
 
     /* 좌석별 이력 */
     List<History> findBySeat_SeatId(Long seatId);
+
+    Optional<History> findByReservation_ReservationId(Long reservationId);
 }

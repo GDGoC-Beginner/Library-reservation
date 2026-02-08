@@ -1,5 +1,7 @@
 package com.example.LMS.domain.reservation;
 
+import com.example.LMS.domain.history.History;
+import com.example.LMS.domain.history.HistoryRepository;
 import com.example.LMS.domain.reservation.dto.ReservationCancelResponse;
 import com.example.LMS.domain.reservation.dto.ReservationCreateRequest;
 import com.example.LMS.domain.reservation.dto.ReservationExtendResponse;
@@ -9,9 +11,11 @@ import com.example.LMS.domain.seat.SeatRepository;
 import com.example.LMS.domain.user.User;
 import com.example.LMS.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -22,6 +26,8 @@ public class ReservationService {
     private final UserRepository userRepository;
     private final SeatRepository seatRepository;
     private final ReservationRepository reservationRepository;
+    private final HistoryRepository historyRepository;
+
 
     // 좌석 예약
     @Transactional
@@ -42,7 +48,7 @@ public class ReservationService {
 
         // 4. 시간 계산
         LocalDateTime startTime = LocalDateTime.now();
-        LocalDateTime endTime = startTime.plusHours(6);
+        LocalDateTime endTime = startTime.plusMinutes(1);
 
         // 5. 좌석 점유
         seat.occupy();
@@ -60,7 +66,7 @@ public class ReservationService {
                 .build();
 
         reservationRepository.save(reservation);
-
+        createUsageHistory(reservation);
         // 7. 응답 DTO 반환
         return ReservationResponse.from(reservation);
     }
@@ -72,11 +78,20 @@ public class ReservationService {
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다."));
 
+        if ("CANCELED".equals(reservation.getStatus())) {
+            throw new IllegalStateException("이미 취소된 예약입니다.");
+        }
+
         reservation.cancel();
         reservation.getSeat().release();
 
+        //이력 상태를 CANCLED로 업데이트
+        updateHistoryStatus(reservation, "CANCELED");
         return ReservationCancelResponse.from(reservation);
     }
+
+    // 3. 시간 종료 → 기존 이력의 상태를 COMPLETED로 변경
+
 
 
     // 예약 연장
@@ -92,10 +107,11 @@ public class ReservationService {
         return ReservationExtendResponse.from(reservation);
     }
 
-
-
     //내 예약 조회
     public ReservationResponse getCurrentReservation(Long userId) {
+        if (userId == null) {
+            throw new IllegalArgumentException("사용자 ID가 없습니다.");
+        }
 
         Reservation reservation = reservationRepository
                 .findByUser_UserIdAndStatus(userId, "ACTIVE")
@@ -108,4 +124,22 @@ public class ReservationService {
         return ReservationResponse.from(reservation);
     }
 
+    // ✅ 사용 이력 생성 (private 메서드)
+    private void createUsageHistory(Reservation reservation) {
+        History history = History.builder()
+                .user(reservation.getUser())
+                .seat(reservation.getSeat())
+                .reservation(reservation)
+                .useDate(LocalDate.now())
+                .status("ACTIVE")
+                .createdAt(LocalDateTime.now())
+                .build();
+        historyRepository.save(history);
+    }
+
+    // ✅ 이력 상태 업데이트 (private 메서드)
+    private void updateHistoryStatus(Reservation reservation, String newStatus) {
+        historyRepository.findByReservation_ReservationId(reservation.getReservationId())
+                .ifPresent(history -> history.changeStatus(newStatus));
+    }
 }
