@@ -1,6 +1,7 @@
 package com.example.LMS.domain.history;
 
 import com.example.LMS.domain.history.dto.HistoryResponse;
+import com.example.LMS.domain.reservation.Reservation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,13 +30,12 @@ public class HistoryService {
                 .collect(Collectors.toList());
     }
 
-
-    //이력 상태 변경
-    @Transactional
-    public void updateStatus(Long historyId, String newStatus) {
-        History history = historyRepository.findById(historyId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 이력이 존재하지 않습니다."));
-
-        history.changeStatus(newStatus);
+    public void saveFromReservation(Reservation reservation) {
+        if (reservation == null) {
+            throw new IllegalArgumentException("예약 정보가 없습니다.");
+        }
+        History history = History.fromReservation(reservation);
+        historyRepository.save(history);
     }
+
 }

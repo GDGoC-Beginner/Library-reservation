@@ -44,7 +44,8 @@ public class Reservation {
     private Integer extendLimit;
 
     @Column(name = "STATUS", length = 20, nullable = false)
-    private String status; // RESERVED, CANCELED, COMPLETED
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status; // ACTIVE, CANCELED, COMPLETED
 
     @Column(name = "CREATED_AT", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -60,7 +61,7 @@ public class Reservation {
     /* ===== 비즈니스 메서드 ===== */
 
     public void cancel() {
-        this.status = "CANCELED";
+        this.status = ReservationStatus.CANCELED;
         this.canceledAt = LocalDateTime.now();
     }
 
@@ -70,6 +71,14 @@ public class Reservation {
         }
         this.endTime = newEndTime;
         this.extendCount++;
+    }
+
+    public void complete() {
+        this.status = ReservationStatus.COMPLETED;
+    }
+
+    public boolean isExpired(LocalDateTime now) {
+        return this.endTime.isBefore(now);
     }
 }
 

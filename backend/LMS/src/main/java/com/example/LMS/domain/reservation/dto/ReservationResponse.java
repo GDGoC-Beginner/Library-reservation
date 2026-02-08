@@ -1,6 +1,7 @@
 package com.example.LMS.domain.reservation.dto;
 
 import com.example.LMS.domain.reservation.Reservation;
+import com.example.LMS.domain.reservation.ReservationStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,7 +14,7 @@ public class ReservationResponse {
     private Long reservationId;
     private Long seatId;
     private Long userId;
-    private String status;
+    private ReservationStatus status;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Integer extendCount;
