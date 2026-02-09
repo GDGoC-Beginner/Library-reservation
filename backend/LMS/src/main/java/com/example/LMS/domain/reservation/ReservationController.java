@@ -2,6 +2,8 @@ package com.example.LMS.domain.reservation;
 
 import com.example.LMS.domain.reservation.dto.*;
 import com.example.LMS.domain.user.CustomUserDetails;
+import com.example.LMS.domain.user.UserService;
+import com.example.LMS.domain.user.dto.UserReservationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class ReservationController {
 
     private final ReservationService reservationService;
+    private final UserService userService;
 
     // 좌석 예약
     @PostMapping
@@ -55,7 +58,7 @@ public class ReservationController {
 
     // 내 예약 조회
     @GetMapping("/me")
-    public ReservationResponse getMyReservation(
+    public UserReservationResponse getMyReservation(
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         if (userDetails == null) {
@@ -63,6 +66,7 @@ public class ReservationController {
         }
 
         Long userId = userDetails.getUserId();
-        return reservationService.getCurrentReservation(userId);
+        return userService.getMyReservation(userId);
     }
+
 }

@@ -60,8 +60,12 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("사용자 없음"));
 
-        ReservationResponse reservation =
-                reservationService.getCurrentReservation(userId);
+        ReservationResponse reservation = null;
+        try {
+            reservation = reservationService.getCurrentReservation(userId);
+        } catch (IllegalArgumentException e) {
+            // 예약 없음 → 그냥 null 유지
+        }
 
         return new UserReservationResponse(
                 user.getUserId(),
