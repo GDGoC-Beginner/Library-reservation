@@ -137,3 +137,20 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# --- Backend (Gradle / Java) ---
+backend/**/.gradle/
+backend/**/build/
+backend/**/bin/
+backend/**/out/
+
+# --- IDE ---
+.idea/
+backend/**/.idea/
+.vscode/
+*.iml
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+Desktop.ini
