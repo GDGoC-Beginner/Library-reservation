@@ -31,6 +31,7 @@ export const getHistory = async () => {
     return { items: existing };
   }
 
-  const res = await apiClient.get("/reservations/history");
+  const res = await apiClient.get("/histories/me");
+
   return res.data; // { items: [...] }
 };
