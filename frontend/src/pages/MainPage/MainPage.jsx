@@ -80,8 +80,13 @@ export default function MainPage() {
     try {
       setHistoryLoading(true);
       setHistoryError("");
+
       const data = await getHistory();
-      setHistory(data.items ?? []);
+
+      // ✅ 서버가 배열(List)로 주는 경우와 { items: [] } 둘 다 대응
+      const items = Array.isArray(data) ? data : (data?.items ?? []);
+
+      setHistory(items);
     } catch (err) {
       if (err?.response?.status === 401) {
         setHistoryError("사용 이력은 로그인 후 확인할 수 있어요.");
@@ -93,6 +98,7 @@ export default function MainPage() {
       setHistoryLoading(false);
     }
   };
+
 
   useEffect(() => {
     fetchMe();
@@ -142,6 +148,9 @@ export default function MainPage() {
 
   const handleExtend = async () => {
     if (!current?.reservationId) return;
+
+    // ✅ 연장 확인창 추가
+    if (!window.confirm("좌석을 연장하시겠습니까?")) return;
 
     try {
       await extendReservation(current.reservationId);
@@ -262,11 +271,7 @@ export default function MainPage() {
                         className="mp-btn mp-btnSecondary mp-inlineBtn"
                         disabled={!canExtend}
                         onClick={handleExtend}
-                        title={
-                          !canExtend
-                            ? "연장은 최대 1번만 가능해요."
-                            : ""
-                        }
+                        title={!canExtend ? "연장은 최대 1번만 가능해요." : ""}
                       >
                         연장
                       </button>
@@ -295,18 +300,21 @@ export default function MainPage() {
             </div>
           ) : (
             <div className="mp-roomRow" aria-label="열람실 선택">
-              {rooms.map((r) => (
-                <button
-                  key={r.roomId}
-                  className="mp-roomCard"
-                  onClick={() => navigate(`/rooms/${r.roomId}`)}
-                >
-                  <div className="mp-roomName">{r.roomName}</div>
-                  <div className="mp-roomMeta">
-                    사용 가능 {r.availableSeats} / {r.totalSeats}
-                  </div>
-                </button>
-              ))}
+              {/* ✅ 제1열람실만 표시 (roomId=1 기준) */}
+              {rooms
+                .filter((r) => r.roomId === 1)
+                .map((r) => (
+                  <button
+                    key={r.roomId}
+                    className="mp-roomCard"
+                    onClick={() => navigate(`/rooms/${r.roomId}`)}
+                  >
+                    <div className="mp-roomName">{r.roomName}</div>
+                    <div className="mp-roomMeta">
+                      사용 가능 {r.availableSeats} / {r.totalSeats}
+                    </div>
+                  </button>
+                ))}
             </div>
           )}
         </section>
@@ -329,25 +337,42 @@ export default function MainPage() {
               <div className="mp-muted">사용 이력이 없어요.</div>
             ) : (
               <div className="mp-historyList">
-                {history.map((h) => (
-                  <div key={h.reservationId} className="mp-historyItem">
-                    <div className="mp-historyLeft">
-                      <div className="mp-historyDate">
-                        {String(h.date).replaceAll("-", ". ")}
-                      </div>
-                      <div className="mp-historyRoom">{h.roomName}</div>
+                {[...history]
+                  .sort((a, b) => {
+                    const ta = new Date(a.createdAt ?? 0).getTime();
+                    const tb = new Date(b.createdAt ?? 0).getTime();
+                    return tb - ta; // 최신이 위로
+                  })
+                  .map((h) => {
+                    const dateText = h.useDate
+                      ? String(h.useDate).replaceAll("-", ". ")
+                      : "-";
 
-                      {/* ✅ RETURNED(status) 제거 → 사용시간 표시 */}
-                      <div className="mp-historyRoom">
-                        {h.startTime && h.endTime
-                          ? formatTimeRange(h.startTime, h.endTime)
-                          : "-"}
-                      </div>
-                    </div>
+                    // "사용 시간"은 서버가 start/end를 안 주므로 일단 createdAt 시각만 표시
+                    const timeText = h.createdAt
+                      ? (() => {
+                        const d = new Date(h.createdAt);
+                        const hh = String(d.getHours()).padStart(2, "0");
+                        const mm = String(d.getMinutes()).padStart(2, "0");
+                        return `${hh}:${mm}`;
+                      })()
+                      : "-";
 
-                    <div className="mp-historySeat">{h.seatNumber}</div>
-                  </div>
-                ))}
+                    // 좌석 "번호"가 따로 없어서 일단 seatId를 번호처럼 표시 (백엔드 수정되면 교체)
+                    const seatNumberText = h.seatNumber ?? h.seatId ?? "-";
+
+                    return (
+                      <div key={h.historyId ?? h.reservationId} className="mp-historyItem">
+                        <div className="mp-historyLeft">
+                          <div className="mp-historyDate">{dateText}</div>
+
+                          <div className="mp-historyRoom">발권 시간: {timeText}</div>
+                        </div>
+
+                        <div className="mp-historySeat">좌석 번호: {seatNumberText}</div>
+                      </div>
+                    );
+                  })}
               </div>
             )}
           </div>
