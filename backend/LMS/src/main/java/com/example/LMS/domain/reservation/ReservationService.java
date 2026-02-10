@@ -121,7 +121,7 @@ public class ReservationService {
         }
 
         Reservation reservation = reservationRepository
-                .findByUser_UserIdAndStatus(userId, "ACTIVE")
+                .findByUserIdAndStatusWithSeatAndRoom(userId, "ACTIVE")
                 .orElse(null);
 
         if (reservation == null) {
@@ -131,7 +131,7 @@ public class ReservationService {
         return ReservationResponse.from(reservation);
     }
 
-    // ✅ 사용 이력 생성 (private 메서드)
+    // 사용 이력 생성 (private 메서드)
     private void createUsageHistory(Reservation reservation) {
         History history = History.builder()
                 .user(reservation.getUser())
@@ -144,7 +144,7 @@ public class ReservationService {
         historyRepository.save(history);
     }
 
-    // ✅ 이력 상태 업데이트 (private 메서드)
+    // 이력 상태 업데이트 (private 메서드)
     private void updateHistoryStatus(Reservation reservation, String newStatus) {
         historyRepository.findByReservation_ReservationId(reservation.getReservationId())
                 .ifPresent(history -> history.changeStatus(newStatus));
