@@ -55,7 +55,7 @@ public class ReservationService {
 
         // 4. 시간 계산
         LocalDateTime startTime = LocalDateTime.now();
-        LocalDateTime endTime = startTime.plusMinutes(3);
+        LocalDateTime endTime = startTime.plusHours(6);
 
         // 5. 좌석 점유
         seat.occupy();
