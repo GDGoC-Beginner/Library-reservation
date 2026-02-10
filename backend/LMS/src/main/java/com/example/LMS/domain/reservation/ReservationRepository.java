@@ -2,6 +2,8 @@ package com.example.LMS.domain.reservation;
 
 import com.example.LMS.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,5 +27,18 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByStatusAndEndTimeBefore(String active, LocalDateTime now);
 
     boolean existsByUserAndStatus(User user, String active);
+
+    // /reservation/me 전용
+    @Query("""
+        select r from Reservation r
+        join fetch r.seat s
+        join fetch s.room
+        where r.user.userId = :userId
+          and r.status = :status
+    """)
+    Optional<Reservation> findByUserIdAndStatusWithSeatAndRoom(
+            @Param("userId") Long userId,
+            @Param("status") String status
+    );
 }
 

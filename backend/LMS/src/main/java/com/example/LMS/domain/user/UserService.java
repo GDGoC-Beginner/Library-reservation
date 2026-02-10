@@ -68,7 +68,7 @@ public class UserService implements UserDetailsService {
         }
 
         return new UserReservationResponse(
-                user.getUserId(),
+                user.getUsername(),
                 user.getName(),
                 reservation
         );

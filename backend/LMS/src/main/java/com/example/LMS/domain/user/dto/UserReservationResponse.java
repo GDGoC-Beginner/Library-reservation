@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserReservationResponse {
 
-    private Long userId;
+    private String username;
     private String name;
     private ReservationResponse currentReservation;
 }
