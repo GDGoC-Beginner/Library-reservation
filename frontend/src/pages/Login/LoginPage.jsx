@@ -11,7 +11,7 @@ import { login } from '../../api/auth/register';
 
 // ===== 스타일 및 이미지 불러오기 =====
 import './LoginPage.css';
-import logo from './pknu_library_logo.png';
+import logo from '@/assets/pknu_library_logo.png';
 
 // ===== 로그인 페이지 컴포넌트 =====
 function LoginPage() {

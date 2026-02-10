@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+// css
 import "./MainPage.css";
 
+// img
+import logo from '@/assets/pknu_library_logo.png';
 // auth
 import { logout } from "@/api/auth/logout";
 
@@ -21,7 +23,7 @@ import { formatTimeRange } from "@/lib/time";
 export default function MainPage() {
   const navigate = useNavigate();
 
-  // ✅ 연장 정책: 무조건 1회 고정
+  // 연장 정책: 무조건 1회 고정
   const EXTEND_LIMIT = 1;
 
   // ===== 상태 =====
@@ -44,7 +46,7 @@ export default function MainPage() {
       setMeLoading(true);
       const data = await getMyReservation();
       setIsAuthed(true);
-      setMe({ userId: data.userId, name: data.name });
+      setMe({ name: data.name, username: data.username });
       setCurrent(data.currentReservation ?? null);
     } catch (err) {
       if (err?.response?.status === 401) {
@@ -83,7 +85,6 @@ export default function MainPage() {
 
       const data = await getHistory();
 
-      // ✅ 서버가 배열(List)로 주는 경우와 { items: [] } 둘 다 대응
       const items = Array.isArray(data) ? data : (data?.items ?? []);
 
       setHistory(items);
@@ -114,7 +115,7 @@ export default function MainPage() {
 
   const canReturn = !!current && current.status === "ACTIVE";
 
-  // ✅ 연장 가능 조건: 최대 1회로 강제
+  // 연장 최대 1회
   const canExtend =
     !!current &&
     current.status === "ACTIVE" &&
@@ -149,7 +150,6 @@ export default function MainPage() {
   const handleExtend = async () => {
     if (!current?.reservationId) return;
 
-    // ✅ 연장 확인창 추가
     if (!window.confirm("좌석을 연장하시겠습니까?")) return;
 
     try {
@@ -166,7 +166,7 @@ export default function MainPage() {
       {/* 헤더 */}
       <header className="mp-header">
         <div className="mp-headerInner">
-          <div className="mp-logoText">도서관 Logo</div>
+          <img src={logo} alt="도서관 로고" />
         </div>
       </header>
 
@@ -218,7 +218,7 @@ export default function MainPage() {
                 <div className="mp-userBar">
                   <div className="mp-userText">
                     <span className="mp-userName">{me?.name}</span>
-                    <span className="mp-userId">{me?.userId}</span>
+                    <span className="mp-userId">{me?.username}</span>
                   </div>
 
                   <button className="mp-btn mp-btnGhost" onClick={handleLogout}>
@@ -300,7 +300,7 @@ export default function MainPage() {
             </div>
           ) : (
             <div className="mp-roomRow" aria-label="열람실 선택">
-              {/* ✅ 제1열람실만 표시 (roomId=1 기준) */}
+              {/* 제1열람실 (roomId=1 기준) */}
               {rooms
                 .filter((r) => r.roomId === 1)
                 .map((r) => (
