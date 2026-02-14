@@ -10,6 +10,8 @@ GDGoC 동아리 Beginner 2팀에서 진행하는 **도서관 좌석 예약 웹 �
 
 ## 프로젝트 개요
 
+![메인 화면](docs/images/main.png)
+
 사용자가 웹을 통해 좌석 현황을 확인하고 예약할 수 있는  
 간단한 좌석 예약 시스템을 기획하였습니다.
 
@@ -66,18 +68,50 @@ GDGoC 동아리 Beginner 일정에 맞추어 약 2개월간 기획부터 설계,
 
 ### 사전 준비
 
-- Node.js (LTS 버전 권장)
-- npm
 - Git
+- Node.js (LTS 권장) / npm
+- Java 17
+
+#### OS별 참고
+- Windows: PowerShell 또는 Git Bash 사용 가능  
+  - Gradle 실행은 `.\gradlew.bat` (PowerShell), `./gradlew` (Git Bash) 둘 다 가능
+- macOS / Linux: 터미널에서 `./gradlew` 사용  
+  - 권한 문제가 있으면 `chmod +x gradlew` 필요
 
 ### 프로젝트 클론
 
 ```bash
 git clone https://github.com/GDGoC-Beginner/Library-reservation.git
-
+cd Library-reservation
 ```
 
-### 프로젝트 실행
+### Backend 실행 (Spring Boot)
+
+백엔드 프로젝트 경로: `backend/LMS`
+
+#### ▶ Windows (PowerShell)
+
+```powershell
+cd backend/LMS
+.\gradlew.bat bootRun
+```
+
+### ▶ macOS / Linux / Git Bash
+
+```bash
+cd backend/LMS
+./gradlew bootRun
+```
+
+정상 실행 시:
+
+```
+http://localhost:8080
+```
+
+---
+
+### Frontend 실행 (React + Vite)
 
 ```bash
 cd frontend
@@ -85,12 +119,22 @@ npm install
 npm run dev
 ```
 
-### 백엔드 연동
+정상 실행 시:
 
-본 프로젝트는 Spring 기반 백엔드 API 서버와 연동됩니다.
-백엔드 서버가 실행 중일 경우 좌석 예약 및 상태 동기화 기능이 정상 동작합니다. 
+```
+http://localhost:5173
+```
 
 ---
+
+### 전체 실행 순서 정리
+
+1. 프로젝트 클론
+2. Backend 실행 (`backend/LMS`)
+3. Frontend 실행 (`frontend`)
+4. 브라우저에서 `http://localhost:5173` 접속
+
+※ Backend(8080)와 Frontend(5173)가 동시에 실행되어야 정상 동작합니다.
 
 ## 개발 규칙 
 
