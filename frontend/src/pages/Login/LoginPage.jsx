@@ -2,11 +2,9 @@
 import { useState } from 'react';
 
 // Link: 페이지 새로고침 없이 다른 경로로 이동하는 컴포넌트
-// useNavigate: 프로그래밍 방식으로 페이지 이동할 때 사용하는 훅
 import { Link, useNavigate } from 'react-router-dom';
 
 // ===== API 함수 불러오기 =====
-// 로그인 API 함수를 register.js에서 가져옴
 import { login } from '../../api/auth/register';
 
 // ===== 스타일 및 이미지 불러오기 =====
@@ -15,7 +13,6 @@ import logo from '@/assets/pknu_library_logo.png';
 
 // ===== 로그인 페이지 컴포넌트 =====
 function LoginPage() {
-  // ----- 페이지 이동을 위한 navigate 함수 -----
   const navigate = useNavigate();
 
   // ----- 폼 입력값 상태 -----
@@ -54,7 +51,6 @@ function LoginPage() {
 
       console.log('로그인 성공:', result);
 
-      // ✅ 로그인 성공 후 메인 페이지로 이동
       navigate('/');
 
     } catch (err) {

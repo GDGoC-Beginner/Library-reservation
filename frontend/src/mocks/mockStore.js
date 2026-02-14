@@ -56,8 +56,4 @@ export function pushMockHistoryItem(item) {
 export function clearMockSession() {
   setMockAuthed(false);
   localStorage.removeItem(KEY_USERID);
-  // current/history는 유지하고 싶으면 여기서 지우지 말고,
-  // 완전 초기화 원하면 아래 두 줄 주석 해제
-  // localStorage.removeItem(KEY_CURRENT);
-  // localStorage.removeItem(KEY_HISTORY);
 }

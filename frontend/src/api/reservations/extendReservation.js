@@ -38,16 +38,15 @@ export const extendReservation = async (reservationId) => {
       throw err;
     }
 
-    // 연장 처리: count 증가 + endTime 1시간 늘리기(연출)
+    // 연장 처리
     const next = { ...cur, extendCount: count + 1 };
 
-    // endTime을 단순히 +1시간 해주는 연출(ISO string 유지)
     try {
       const end = new Date(next.endTime);
       end.setHours(end.getHours() + 1);
       next.endTime = end.toISOString().slice(0, 19); // "YYYY-MM-DDTHH:mm:ss"
     } catch {
-      // endTime 파싱 실패해도 count 증가는 적용
+
     }
 
     setMockCurrentReservation(next);

@@ -37,7 +37,7 @@ export const cancelReservation = async (reservationId) => {
       throw err;
     }
 
-    // history에 기록 추가 (status는 이제 UI에서 안 쓰니 굳이 안 넣음)
+    // history에 기록 추가 
     pushMockHistoryItem({
       reservationId: cur.reservationId,
       date: todayYYYYMMDD(),

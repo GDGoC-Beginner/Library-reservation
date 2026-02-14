@@ -29,7 +29,7 @@ export function mockCurrentReservation() {
   };
 }
 
-// 사용 이력(Mock) — status 대신 시간 보여줄 거라 start/end 포함
+// 사용 이력(Mock) 
 export const mockHistorySeed = [
   {
     reservationId: 101,

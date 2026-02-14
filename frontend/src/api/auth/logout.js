@@ -7,7 +7,7 @@ import { clearMockSession } from "../../mocks/mockStore";
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 
-// POST /auth/logout
+// 로그아웃
 export const logout = async () => {
   if (USE_MOCK) {
     await sleep(150);
@@ -16,5 +16,5 @@ export const logout = async () => {
   }
 
   const res = await apiClient.post("/auth/logout");
-  return res.data; // { message, status }
+  return res.data; 
 };

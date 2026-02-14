@@ -114,7 +114,6 @@
   border: 1px solid var(--line);
 }
 
-/* 버튼이 값 옆에서 한 줄로 유지 */
 .mp-inlineBtn {
   margin-left: 10px;
   white-space: nowrap;

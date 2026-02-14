@@ -22,7 +22,6 @@ export const getMyReservation = async () => {
 
     const userId = getMockUserId();
 
-    // ✅ 자동 생성(seed) 금지: 없으면 진짜로 null
     const current = getMockCurrentReservation();
 
     return {
@@ -33,5 +32,5 @@ export const getMyReservation = async () => {
   }
 
   const res = await apiClient.get("/reservations/me");
-  return res.data; // { userId, name, currentReservation }
+  return res.data; 
 };

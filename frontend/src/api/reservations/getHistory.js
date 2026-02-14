@@ -33,5 +33,5 @@ export const getHistory = async () => {
 
   const res = await apiClient.get("/histories/me");
 
-  return res.data; // { items: [...] }
+  return res.data;
 };

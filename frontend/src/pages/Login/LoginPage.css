@@ -1,12 +1,10 @@
 /* ===== 로그인 페이지 전체 컨테이너 ===== */
-/* position: fixed로 화면 전체를 차지하게 함 */
-/* flexbox로 내용물을 정중앙에 배치 */
 .login {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100vh;  /* 최소 높이: 뷰포트 전체 */
+  min-height: 100vh;  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,12 +13,11 @@
 }
 
 /* ===== 로그인 폼 박스 ===== */
-/* 흰색 배경에 둥근 모서리와 그림자 */
 .login__container {
   width: 100%;
-  max-width: 400px;   /* 최대 너비 제한 */
+  max-width: 400px;   
   background-color: #ffffff;
-  border-radius: 8px;   /* 둥근 모서리 */
+  border-radius: 8px;   
   padding: 40px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -28,8 +25,8 @@
 /* ===== 로고 이미지 ===== */
 .login__logo {
   display: block;
-  max-width: 250px;   /* 최대 너비 제한 */
-  height: auto;       /* 비율 유지 */
+  max-width: 250px;  
+  height: auto;       
   margin: 0 auto 24px auto;
 }
 
@@ -43,18 +40,17 @@
 }
 
 /* ===== 폼 전체 레이아웃 ===== */
-/* 세로 방향으로 요소 배치, 간격 20px */
 .login__form {
   display: flex;
   flex-direction: column;
-  gap: 20px;    /* 필드 간 간격 */
+  gap: 20px;    
 }
 
 /* ===== 각 입력 필드 컨테이너 ===== */
 .login__field {
   display: flex;
   flex-direction: column;
-  gap: 8px;   /* 라벨과 입력창 간격 */
+  gap: 8px;   
 }
 
 /* ===== 입력 필드 라벨 ===== */
@@ -70,7 +66,7 @@
   font-size: 14px;
   border: 1px solid #dddddd;
   border-radius: 4px;
-  outline: none;              /* 기본 포커스 아웃라인 제거 */
+  outline: none;             
   transition: border-color 0.2s;
 }
 
@@ -113,7 +109,7 @@
 /* 버튼 비활성화 상태 (로딩 중) */
 .login__button:disabled {
   background-color: #a0c4e8;
-  cursor: not-allowed;  /* 금지 커서 */
+  cursor: not-allowed;  
 }
 
 /* ===== 회원가입 페이지 링크 ===== */

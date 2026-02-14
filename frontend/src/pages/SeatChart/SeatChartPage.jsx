@@ -22,7 +22,7 @@ export default function SeatChartPage() {
   const [selectedNumber, setSelectedNumber] = useState(null);
   const [isReserving, setIsReserving] = useState(false);
 
-  // ✅ 좌석 상태 로드
+  // 좌석 상태 로드
   useEffect(() => {
     const fetchSeats = async () => {
       try {
@@ -30,12 +30,6 @@ export default function SeatChartPage() {
         setLoadError("");
 
         const data = await getRoomSeats(roomId);
-
-        /**
-         * ⚠️ 여기 응답 shape는 백엔드 RoomSeatsResponse에 맞춰 조정해야 함.
-         * 예시로 seats 배열이 있다고 가정:
-         * data.seats = [{ seatId, seatNumber, isAvailable }] 또는 [{ id, number, isAvailable }]
-         */
         const seats = data?.seats ?? data?.items ?? [];
 
         const map = new Map();
@@ -49,8 +43,8 @@ export default function SeatChartPage() {
 
           map.set(Number(seatNumber), Number(seatId));
 
-          // 사용중 판정: isAvailable이 "N"이면 막기 (현재 백엔드 기준)
-          const isAvail = s.isAvailable ?? s.available; // "Y"/"N" 또는 boolean일 수도
+          // 사용중 판정
+          const isAvail = s.isAvailable ?? s.available;
           const occupied =
             isAvail === "N" || isAvail === false || s.status === "OCCUPIED";
 
@@ -91,7 +85,6 @@ export default function SeatChartPage() {
   const handleReserve = async () => {
     if (!selectedNumber || isReserving) return;
 
-    // ✅ seatNumber -> seatId 매핑 없으면 예약 불가
     const seatId = seatNumberToId.get(selectedNumber);
     if (!seatId) {
       alert("좌석 정보를 찾지 못했어요. 새로고침 후 다시 시도해주세요.");
@@ -102,15 +95,8 @@ export default function SeatChartPage() {
 
     setIsReserving(true);
     try {
-      /**
-       * ✅ 실서비스 추천: start/endTime을 프론트가 만들지 말고
-       * 백엔드에서 정책(6시간)을 적용하도록 하는 게 가장 안전함.
-       *
-       * 백엔드가 아직 start/endTime을 요구하면, 그때만 보내기.
-       */
       await createReservation({
         seatId,
-        // startTime/endTime이 서버에서 필요 없으면 제거 권장
       });
 
       alert(`${selectedNumber}번이 예약되었습니다`);

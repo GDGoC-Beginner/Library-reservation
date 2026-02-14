@@ -4,7 +4,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-  /* 색상 스킴은 굳이 dark 기본을 강제하지 말자 */
   color-scheme: light;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -26,14 +25,12 @@ body {
 }
 
 body {
-  /* ✅ 핵심: flex로 중앙정렬 금지! */
   display: block;
   min-height: 100vh;
 
   /* 가로 스크롤만 방지 */
   overflow-x: hidden;
 
-  /* 전역 배경은 페이지별로(예: MainPage.css) 잡는 게 깔끔 */
   background: #fff;
 }
 
@@ -51,8 +48,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* 버튼 기본은 각 페이지/컴포넌트에서 정의하는 걸 추천
-   (전역에서 배경/테두리 강제하면 UI 깨짐) */
 button {
   font-family: inherit;
 }

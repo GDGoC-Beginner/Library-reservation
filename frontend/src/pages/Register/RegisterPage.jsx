@@ -70,8 +70,6 @@ function RegisterPage() {
     try {
       // API 호출 (POST /auth/check, 요청: { userId })
       const result = await checkUsername(formData.username);
-
-      // ✅ 백엔드 응답: { message: "...", available: true/false }
       const isAvailable = result?.available === true;
 
       setUsernameChecked(true);
@@ -90,7 +88,6 @@ function RegisterPage() {
       const errorData = err.response?.data;
 
       // 서버가 상태코드로 중복/실패를 구분하는 경우 대비
-      // (예: 400이면 중복)
       if (err.response?.status === 400) {
         setUsernameChecked(true);
         setUsernameAvailable(false);
